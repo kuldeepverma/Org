@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% load sortable_column %}
+
+{% block content %}
+<div class="container">
+    <div class="section-heading">
+        <h2>Project List</h2>
+        <br>
+        <span>
+            {% if add_project_access %}<a href="/org/project_new">Add Project</a>{% endif %}
+        </span>
+
+    </div>
+</div>
+<br>
+<div class="container">
+    <span>
+    <form action="{% url 'project' %}" method="get">
+        <input name="q" type="text" placeholder="Search...">
+    </form>
+    </span>
+    <table class="table table-borderless">
+        <thead class="border-bottom font-weight-bold">
+            <tr class="table-striped">
+                {% sortable_column request=request property="project_id" title="Project ID" %}
+                {% sortable_column request=request property="name" title="Project Name" %}
+                {% sortable_column request=request property="description" title="Project Description" %}
+                {% sortable_column request=request property="url" title="Project Link" %}
+            </tr>
+        </thead>
+        <tbody>
+            {% for project in project_list %}
+            <tr>
+                <td><a href="/org/project/{{project.id}}">{{project.project_id}}</a></td>
+                <td>{{project.name}}</td>
+                <td>{{project.description}}</td>
+                {% if project.url %}
+                    <td><a href="{{project.project_url}}">{{project.url}}</a></td>
+                {% else %}
+                    <td></td>
+                {% endif %}
+            <tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock content %}

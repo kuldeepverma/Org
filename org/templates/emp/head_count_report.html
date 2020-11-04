@@ -1,0 +1,134 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% load sortable_column %}
+{% block content %}
+
+<div class="container">
+    <h4>Headcount Report</h4>
+</div>
+
+<div class="container">
+    <form method="post">
+        {% csrf_token %}
+        {{ form|crispy }}
+        <button type="submit" class="btn btn-primary">Submit</button>
+        <br>
+        <br>
+        <h4>Separated Employees between specified dates - {{separated_employees.count}}</h4>
+        <table class="table table-borderless">
+            <thead class="border-bottom font-weight-bold">
+                <tr class="table-striped">
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Designation</th>
+                    <th>Primary Manager</th>
+                    <th>Function</th>
+                    <th>Date of Joining</th>
+                    <th>Date of Resignation</th>
+                    <th>Date of Separation</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for employee in separated_employees %}
+                <tr>
+                    <td><a href="/org/employee/{{employee.id}}">{{employee.employee_id}}</a></td>
+                    <td>{{employee.employee_name}}</td>
+                    <td>{{employee.designation}}</td>
+                    <td>{{employee.primary_manager.employee_name}}</td>
+                    <td><a href="/org/function/{{employee.primary_function_id}}">{{employee.primary_function.name}}</a></td>
+                    <td>{{employee.date_of_joining}}</td>
+                    <td>{{employee.date_of_resignation}}</td>
+                    <td>{{employee.date_of_separation}}</td>
+                <tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <br>
+        <h4>Resigned Employees between specified dates - {{resigned_employees.count}}</h4>
+        <table class="table table-borderless">
+            <thead class="border-bottom font-weight-bold">
+                <tr class="table-striped">
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Designation</th>
+                    <th>Primary Manager</th>
+                    <th>Function</th>
+                    <th>Date of Joining</th>
+                    <th>Date of Resignation</th>
+                    <th>Date of Separation</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for employee in resigned_employees %}
+                <tr>
+                    <td><a href="/org/employee/{{employee.id}}">{{employee.employee_id}}</a></td>
+                    <td>{{employee.employee_name}}</td>
+                    <td>{{employee.designation}}</td>
+                    <td>{{employee.primary_manager.employee_name}}</td>
+                    <td><a href="/org/function/{{employee.primary_function_id}}">{{employee.primary_function.name}}</a></td>
+                    <td>{{employee.date_of_joining}}</td>
+                    <td>{{employee.date_of_resignation}}</td>
+                    <td>{{employee.date_of_separation}}</td>
+                <tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <br>
+        <h4>New Employees who joined between specified dates - {{new_employees.count}}</h4>
+        <table class="table table-borderless">
+            <thead class="border-bottom font-weight-bold">
+                <tr class="table-striped">
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Designation</th>
+                    <th>Employment Type</th>
+                    <th>Primary Manager</th>
+                    <th>Function</th>
+                    <th>Date of Joining</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for employee in new_employees %}
+                <tr>
+                    <td><a href="/org/employee/{{employee.id}}">{{employee.employee_id}}</a></td>
+                    <td>{{employee.employee_name}}</td>
+                    <td>{{employee.designation}}</td>
+                    <td>{{employee.employment_type}}</td>
+                    <td>{{employee.primary_manager.employee_name}}</td>
+                    <td><a href="/org/function/{{employee.primary_function_id}}">{{employee.primary_function.name}}</a></td>
+                    <td>{{employee.date_of_joining}}</td>
+                <tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <br>
+        <h4>Active Employees as on specified End Date - {{active_employees.count}}</h4>
+        <table class="table table-borderless">
+            <thead class="border-bottom font-weight-bold">
+                <tr class="table-striped">
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Designation</th>
+                    <th>Employment Type</th>
+                    <th>Primary Manager</th>
+                    <th>Function</th>
+                    <th>Date of Joining</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for employee in active_employees %}
+                <tr>
+                    <td><a href="/org/employee/{{employee.id}}">{{employee.employee_id}}</a></td>
+                    <td>{{employee.employee_name}}</td>
+                    <td>{{employee.designation}}</td>
+                    <td>{{employee.employment_type}}</td>
+                    <td>{{employee.primary_manager.employee_name}}</td>
+                    <td><a href="/org/function/{{employee.primary_function_id}}">{{employee.primary_function.name}}</a></td>
+                    <td>{{employee.date_of_joining}}</td>
+                <tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </form>
+</div>
+{% endblock content %}

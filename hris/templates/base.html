@@ -1,0 +1,82 @@
+{% load static %}
+{% load socialaccount %}
+{% providers_media_js %}
+
+
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Catalyst 0.1</title>
+
+
+  <link rel='stylesheet' href="{% static 'bootstrap.min.css' %}">
+
+      <link rel="stylesheet" href="{% static 'style.css' %}">
+
+
+</head>
+
+<body>
+
+  <body class="hero-anime">
+
+	<div class="navigation-wrap bg-light start-header start-style">
+		<div class="container">
+			<div class="row">
+				<div class="col-12">
+					<nav class="navbar navbar-expand-md navbar-light">
+
+						<a class="navbar-brand" href="/"><img src="{% static 'logo.png' %}" alt=""></a>
+
+						<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+							<span class="navbar-toggler-icon"></span>
+						</button>
+
+						<div class="collapse navbar-collapse" id="navbarSupportedContent">
+							<ul class="navbar-nav ml-auto py-4 py-md-0">
+								{% if user.is_authenticated %}
+								<li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4">
+									<a class="nav-link dropdown-toggle" href="/org" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Organization</a>
+									<div class="dropdown-menu">
+										<a class="dropdown-item" href="/org">Org Main</a>
+										<a class="dropdown-item" href="/org/function">Function</a>
+										<a class="dropdown-item" href="/org/employee">Employee</a>
+										<a class="dropdown-item" href="/org/project">Project</a>
+										<a class="dropdown-item" href="/org/project_role">Project Roles</a>
+										<a class="dropdown-item" href="/org/skill">Skills</a>
+									</div>
+								</li>
+								<li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4">
+									<a class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">My Profile</a>
+									<div class="dropdown-menu">
+										<a class="dropdown-item" href="/org/my_skill">My Skills</a>
+										<a class="dropdown-item" href="/change_password">Change Password</a>
+										<a class="dropdown-item" href="/logout">Logout</a>
+									</div>
+								</li>
+								{% else %}
+        						<li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4">
+									<a class="nav-link" href="/login">Login</a>
+								</li>
+        						{% endif %}
+							</ul>
+						</div>
+					</nav>
+				</div>
+			</div>
+		</div>
+	</div>
+<br><br><br><br><br>
+
+    {% block content %}
+
+    {% endblock content %}
+
+
+</body>
+	
+	<script src="{% static 'jquery.min.js' %}"></script>
+	<script src="{% static 'bootstrap.min.js' %}"></script>
+    <script  src="{% static 'index.js' %}"></script>
+
+</html>

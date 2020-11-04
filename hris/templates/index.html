@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% load socialaccount %}
+{% block content %}
+
+<section>
+    <div class="container">
+        <p>Catalyst v0.1</p>
+        {% if user.is_authenticated %}
+        <p>Welcome, {{ user.first_name }}!</p>
+        {% else %}
+        <p>Please <a href="/login">Login</a> to continue.</p>
+        {% endif %}
+
+    </div>
+</section>
+{% endblock content %}

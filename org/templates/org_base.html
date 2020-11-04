@@ -1,0 +1,44 @@
+{% load static %}
+
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Catalyst 0.1</title>
+    <link href="{% static 'bootstrap.css' %}" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Lato:100,300,400,700,900" rel="stylesheet" />
+    <link rel="stylesheet" href="{% static 'fontawesome.css' %}" />
+    <link rel="stylesheet" href="{% static 'tooplate-style.css' %}" />
+    <link rel="stylesheet" href="{% static 'owl.css' %}" />
+    <link rel="stylesheet" href="{% static 'lightbox.css' %}" />
+  </head>
+<body>
+    <div id="page-wraper">
+      <!-- Sidebar Menu -->
+      <div class="responsive-nav">
+        <i class="fa fa-bars" id="menu-toggle"></i>
+        <div id="menu" class="menu">
+          <i class="fa fa-times" id="menu-close"></i>
+          <div class="container">
+            <div class="image">
+              <a href="/"><img src="{% static 'top_banner.png' %}" alt="" /></a>
+            </div>
+            <div class="author-content">
+              <h4>Organization</h4>
+            </div>
+            <nav class="main-nav" role="navigation">
+              <ul class="main-menu">
+                <li><a href="employee">Employee</a></li>
+                <li><a href="project">Project</a></li>
+                <li><a href="function">Function</a></li>
+              </ul>
+            </nav>
+          </div>
+        </div>
+      </div>
+    {% block content %}
+
+    {% endblock content %}
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% load sortable_column %}
+
+{% block content %}
+<div class="container">
+    <div class="section-heading">
+        <h2>Project Roles</h2>
+        <br>
+        <span>
+            {% if add_project_access %}<a href="/org/project_role_new">Add Role</a>{% endif %}
+        </span>
+
+    </div>
+</div>
+<br>
+<div class="container">
+    <span>
+    <form action="{% url 'project_role' %}" method="get">
+        <input name="q" type="text" placeholder="Search...">
+    </form>
+    </span>
+    <table class="table table-borderless">
+        <thead class="border-bottom font-weight-bold">
+            <tr class="table-striped">
+                {% sortable_column request=request property="role" title="Role" %}
+                {% sortable_column request=request property="description" title="Description" %}
+                {% if add_project_access %}<td></td><td></td>{% endif %}
+            </tr>
+        </thead>
+        <tbody>
+            {% for role in project_roles %}
+            <tr>
+                <td>{{role.role}}</td>
+                <td>{{role.description}}</td>
+                {% if add_project_access %}
+                <td><a href="/org/project_role_edit/{{role.pk}}">Edit</a></td>
+                <td><a href="/org/project_role_delete/{{role.pk}}">Delete</a></td>
+                {% endif %}
+            <tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock content %}

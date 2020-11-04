@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% load sortable_column %}
+{% block content %}
+
+
+
+<div class="container">
+    <div class="section-heading">
+        <h2>{{function.name}}</h2>
+        <br>
+        <span>
+            {% if add_function_access %}<a href="/org/function_edit/{{function.id}}">Edit Function</a>{% endif %}
+        </span>
+
+    </div>
+</div>
+<br>
+<div class="container">
+    <table class="table table-borderless">
+        <tr><td>Function ID</td><td>{{function.function_id}}</td></tr>
+        <tr><td>Function Manager</td><td><a href="/org/employee/{{function.manager_id}}">{{function.manager.employee_name}}</a></td></tr>
+        <tr><td>Function Description</td><td>{{function.description}}</td></tr>
+    </table>
+    <h4>Members ({{employees.count}})</h4>
+    <table class="table table-borderless">
+        <tr><th>ID</th><th>Name</th><th>Designation</th></tr>
+        {% for employee in employees %}
+        <tr><td><a href="/org/employee/{{employee.id}}">{{employee.employee_id}}</a></td><td>{{employee.employee_name}}</td><td>{{employee.designation}}</td></tr>
+        {% endfor %}
+    </table>
+</div>
+
+{% endblock content %}

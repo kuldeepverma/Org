@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="section about-me">
+    <div class="container">
+        <div class="section-heading">
+            <h2>Organization Section</h2>
+            <div class="line-dec"></div>
+            <span>This section allows you to view members in the organization structure. There are three logical entities to this section:</span>
+            <p>
+                <li><a href="/org/employee">Employee</a>: In the Employee section, we have the employee directory including the reporting structure</li>
+                <li><a href="/org/function">Function</a>: In the Function section, we have the list of all the functions and their details</li>
+                <li><a href="/org/project">Project</a>: In the Project section, we have list of all projects and their details including list of members</li>
+            </p>
+        </div>
+    </div>
+</section>
+{% endblock content %}

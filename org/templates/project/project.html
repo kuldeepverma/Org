@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% load sortable_column %}
+{% block content %}
+
+
+
+<div class="container">
+    <div class="section-heading">
+        <h2>{{project.name}}</h2>
+        <br>
+        <span>
+            {% if add_project_access %}<a href="/org/project_edit/{{project.id}}">Edit Project</a>{% endif %}
+        </span>
+
+    </div>
+</div>
+<br>
+<div class="container">
+    <table class="table table-borderless">
+        <tr><td>Project ID</td><td>{{project.project_id}}</td></tr>
+        <tr><td>Project Description</td><td>{{project.description}}</td></tr>
+        <tr><td>Project URL</td><td>{{project.url}}</td></tr>
+    </table>
+
+    <h4>Members:</h4>
+    {% if add_project_access %}<a href="/org/project_mapping_new/{{project.id}}">Add Members</a>{% endif %}
+    <table class="table table-borderless">
+        <tr>
+            <th>Role</th>
+            <th>Member</th>
+            <th>Skill</th>
+            <th>Bandwidth</th>
+            {% if add_project_access %}
+            <th></th>
+            <th></th>
+            {% endif %}
+        </tr>
+        {% for member in members %}
+        <tr>
+            <td>{{member.role.role}}</td>
+            <td><a href="/org/employee/{{member.member.pk}}">{{member.member.employee_name}}</a></td>
+            <td>{{member.skill.name}}</td>
+            <td>{% widthratio member.bandwidth 1.0 100 %}%</td>
+            {% if add_project_access %}
+            <td><a href="/org/project_mapping_edit/{{member.id}}">Edit</a></td>
+            <td><a href="/org/project_mapping_delete/{{member.id}}">Delete</a></td>
+            {% endif %}
+        </tr>
+        {% endfor %}
+    </table>
+
+</div>
+
+{% endblock content %}

@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% load sortable_column %}
+{% block content %}
+
+
+
+<div class="container">
+    <div class="section-heading">
+        <h2>{{skill.name}}</h2>
+    </div>
+</div>
+<div class="container">
+    <table class="table table-borderless">
+        <tr><td>Skill Description:</td><td>{{skill.description}}</td></tr>
+    </table>
+    <br>
+    <h4>Members:</h4>
+    <table class="table table-borderless">
+        <tr>
+            <th>Member</th>
+            <th>Proficiency</th>
+            <th>Interested</th>
+        </tr>
+        {% for member in members %}
+        <tr>
+            <td><a href="/org/employee/{{member.employee_id}}">{{member.employee.employee_name}}</a></td>
+            <td>{{member.proficiency}}</td>
+            <td>{% if member.interested %}&#10004;{% endif %}</td></td>
+        </tr>
+        {% endfor %}
+    </table>
+
+</div>
+
+{% endblock content %}

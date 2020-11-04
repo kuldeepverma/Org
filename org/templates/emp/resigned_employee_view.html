@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% load sortable_column %}
+{% block content %}
+
+
+
+<div class="container">
+    <div class="section-heading">
+        <h2>Employee List</h2>
+        <br>
+    </div>
+</div>
+<br>
+<div class="container">
+    <span>
+        <form action="{% url 'ex_employee' %}" method="get">
+            <input name="q" type="text" placeholder="Search...">
+        </form>
+    </span>
+    <table class="table table-borderless">
+        <thead class="border-bottom font-weight-bold">
+            <tr class="table-striped">
+                {% sortable_column request=request property="employee_id" title="Employee ID" %}
+                {% sortable_column request=request property="employee_name" title="Name" %}
+                {% sortable_column request=request property="designation" title="Designation" %}
+                {% sortable_column request=request property="date_of_joining" title="Joining Date" %}
+                {% sortable_column request=request property="date_of_resignation" title="Resignation Date" %}
+                {% sortable_column request=request property="date_of_separation" title="Separation Date" %}
+                {% sortable_column request=request property="manager_name" title="Manager Name" %}
+                {% sortable_column request=request property="functional_manager" title="Functional Manager" %}
+                {% sortable_column request=request property="function_name" title="Function" %}
+                {% sortable_column request=request property="personal_email" title="Personal Email" %}
+                {% sortable_column request=request property="mobile_number" title="Mobile Number" %}
+            </tr>
+        </thead>
+        <tbody>
+            {% for employee in employee_list %}
+            <tr>
+                <td><a href="/org/employee/{{employee.id}}">{{employee.employee_id}}</a></td>
+                <td>{{employee.employee_name}}</td>
+                <td>{{employee.designation}}</td>
+                <td>{{employee.date_of_joining}}</td>
+                <td>{{employee.date_of_resignation}}</td>
+                <td>{{employee.date_of_separation}}</td>
+                <td><a href="/org/employee/{{employee.primary_manager_id}}">{{employee.primary_manager.employee_name}}</a></td>
+                <td>{{employee.functional_manager}}</td>
+                <td><a href="/org/function/{{employee.primary_function_id}}">{{employee.primary_function.name}}</a></td>
+                <td>{{employee.personal_email}}</td>
+                <td>{{employee.mobile_number}}</td>
+            <tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock content %}
